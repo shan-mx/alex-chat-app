@@ -5,6 +5,7 @@ type ChatMessagesStore = {
   chatMessages: ChatMessage[];
   setChatMessages: (newMessageList: ChatMessage[]) => void;
   addMessage: (newMessage: ChatMessage) => void;
+  updateLatestMessage: (updatedMessage: ChatMessage) => void;
 };
 
 export const useChatMessagesStore = create<ChatMessagesStore>()((set) => ({
@@ -15,6 +16,11 @@ export const useChatMessagesStore = create<ChatMessagesStore>()((set) => ({
   addMessage(newMessage) {
     set((state) => ({
       chatMessages: [...state.chatMessages, newMessage],
+    }));
+  },
+  updateLatestMessage(updatedLastMessage) {
+    set((state) => ({
+      chatMessages: [...state.chatMessages.slice(0, -1), updatedLastMessage],
     }));
   },
 }));

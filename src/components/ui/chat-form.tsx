@@ -12,6 +12,9 @@ export default function ChatForm() {
   const [messageContent, setMessageContent] = useState("");
   const chatPageId = useChatPageStore((s) => s.chatPageId);
   const addMessage = useChatMessagesStore((s) => s.addMessage);
+  const updateLatestMessage = useChatMessagesStore(
+    (s) => s.updateLatestMessage,
+  );
   const createUserMessage = api.chatMessage.create.useMutation({
     onSettled: () => {
       setMessageContent("");
@@ -32,8 +35,20 @@ export default function ChatForm() {
     onSuccess: (data) => {
       addMessage({
         sender: data.sender,
-        content: data.content,
+        content: "",
       });
+      const response = data.content;
+      let response_all = "";
+      for (const word of response.split(" ")) {
+        setTimeout(() => {
+          response_all += word + " ";
+          console.log(response_all);
+          updateLatestMessage({
+            sender: data.sender,
+            content: response_all,
+          });
+        }, 1000);
+      }
     },
   });
 

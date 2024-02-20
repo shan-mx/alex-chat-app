@@ -5,7 +5,7 @@ import ChatForm from "./chat-form";
 
 export default function Footer() {
   return (
-    <div className="fixed bottom-0 flex w-full border-t">
+    <div className="mt-auto flex w-full border-t">
       <div className="w-64">
         <div className="flex items-center justify-between p-4">
           <Button className="flex items-center space-x-2" variant="secondary">

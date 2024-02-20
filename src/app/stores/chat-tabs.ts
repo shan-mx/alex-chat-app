@@ -1,10 +1,10 @@
-import { type ChatPage } from "@/types";
+import { type ChatPage as ChatTab } from "@/types";
 import { create } from "zustand";
 
 type ChatTabsStore = {
-  chatTabs: ChatPage[];
-  setChatTabs: (newTabList: ChatPage[]) => void;
-  addTab: (newTab: ChatPage) => void;
+  chatTabs: ChatTab[];
+  setChatTabs: (newTabList: ChatTab[]) => void;
+  addTab: (newTab: ChatTab) => void;
 };
 
 export const useChatTabsStore = create<ChatTabsStore>()((set) => ({

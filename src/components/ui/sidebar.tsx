@@ -1,12 +1,12 @@
 "use client";
 
-import { ChatPageStore } from "@/app/stores/chat-page";
-import { ChatTabsStore } from "@/app/stores/chat-tabs";
+import { useChatPageStore } from "@/app/stores/chat-page";
+import { useChatTabsStore } from "@/app/stores/chat-tabs";
 import ChatTab from "@/components/ui/chat-tab";
 
 export default function Sidebar() {
-  const chatPageId = ChatPageStore((s) => s.chatPageId);
-  const chatTabs = ChatTabsStore.use.currentTabs();
+  const chatPageId = useChatPageStore((s) => s.chatPageId);
+  const chatTabs = useChatTabsStore((s) => s.chatTabs);
   console.log(
     `re-rendering sidebar with newest current id ${chatPageId} and chat history list length ${chatTabs?.length}`,
   );

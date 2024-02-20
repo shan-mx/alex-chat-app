@@ -1,14 +1,14 @@
 "use client";
 
-import { ChatPageStore } from "@/app/stores/chat-page";
-import { ChatTabsStore } from "@/app/stores/chat-tabs";
+import { useChatPageStore } from "@/app/stores/chat-page";
+import { useChatTabsStore } from "@/app/stores/chat-tabs";
 import { Button } from "@/components/ui/button";
 import { api } from "@/trpc/react";
 import { ChevronDownIcon, SettingsIcon } from "./icons";
 
 export default function Navbar() {
-  const setChatPageId = ChatPageStore((s) => s.setChatPageId);
-  const addChatTab = ChatTabsStore((s) => s.addTab);
+  const setChatPageId = useChatPageStore((s) => s.setChatPageId);
+  const addChatTab = useChatTabsStore((s) => s.addTab);
 
   const createChatPage = api.chatPage.create.useMutation({
     onSuccess: (data) => {

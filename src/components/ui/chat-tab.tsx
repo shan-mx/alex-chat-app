@@ -1,8 +1,8 @@
-import { ChatPageStore } from "@/app/stores/chat-page";
 import { type ChatPage } from "@/types";
+import { useChatPageStore } from "@/app/stores/chat-page";
 
 export default function ChatTab(chat: ChatPage) {
-  const setChatPageId = ChatPageStore((s) => s.setChatPageId);
+  const setChatPageId = useChatPageStore((s) => s.setChatPageId);
 
   return (
     <div className="border-b p-4">

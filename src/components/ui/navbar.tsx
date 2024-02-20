@@ -17,7 +17,7 @@ export default function Navbar() {
       addChatTab({
         id: data.id,
         title: data.id.toString(),
-        createdAt: data.createdAt.toString(),
+        createdAt: data.createdAt.toUTCString(),
       });
     },
   });
@@ -26,7 +26,7 @@ export default function Navbar() {
       <div className="w-64">
         <div className="flex items-center justify-between p-3">
           <Button
-            className="text-lg font-semibold"
+            className="px-8 text-lg font-semibold"
             onClick={() => {
               createChatPage.mutate();
             }}

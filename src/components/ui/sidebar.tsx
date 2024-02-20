@@ -17,7 +17,7 @@ export default function Sidebar() {
         {chatTabs.map((chat, index) => (
           <ChatTab
             key={index}
-            title={chat.id == chatPageId ? "current" : String(chat.id)}
+            title={String(chat.title)}
             id={chat.id}
             createdAt={chat.createdAt}
           />

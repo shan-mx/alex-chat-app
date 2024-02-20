@@ -24,23 +24,28 @@ export default function ChatArea() {
   const bottomRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    console.log("auto scrolling");
-
-    if (bottomRef.current) {
-      bottomRef.current?.scrollIntoView({ behavior: "smooth", block: "end" });
-    }
+    bottomRef.current?.scrollIntoView({ behavior: "instant", block: "end" });
   }, [chatMessages]);
 
   return (
     <main className="flex h-full flex-1 flex-col overflow-y-auto">
       <div className="flex-1 space-y-4 p-4">
-        {chatMessages.map((message, index) => (
-          <Message
-            key={index}
-            sender={message.sender}
-            content={message.content}
-          />
-        ))}
+        {chatMessages.length ? (
+          chatMessages.map(
+            (message, index) =>
+              Boolean(message.content) && (
+                <Message
+                  key={index}
+                  sender={message.sender}
+                  content={message.content}
+                />
+              ),
+          )
+        ) : (
+          <div className="flex items-center justify-center">
+            <div className="text-lg text-gray-400">No chat history yet</div>
+          </div>
+        )}
       </div>
       <div ref={bottomRef} />
     </main>

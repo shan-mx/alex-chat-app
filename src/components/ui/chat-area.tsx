@@ -32,7 +32,7 @@ export default function ChatArea() {
   }, [chatMessages]);
 
   return (
-    <div className="flex h-full flex-col">
+    <main className="flex h-full flex-1 flex-col overflow-y-auto">
       <div className="flex-1 space-y-4 p-4">
         {chatMessages.map((message, index) => (
           <Message
@@ -43,6 +43,6 @@ export default function ChatArea() {
         ))}
       </div>
       <div ref={bottomRef} />
-    </div>
+    </main>
   );
 }

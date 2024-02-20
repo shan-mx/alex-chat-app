@@ -39,12 +39,8 @@ export default function Homepage() {
     <div className="flex h-screen flex-col">
       <Navbar />
       <div className="flex overflow-hidden">
-        <div className="overflow-y-auto">
-          <Sidebar />
-        </div>
-        <main className="flex-1 overflow-y-auto">
-          <ChatArea />
-        </main>
+        <Sidebar />
+        <ChatArea />
       </div>
       <Footer />
     </div>

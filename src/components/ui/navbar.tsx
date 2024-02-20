@@ -37,7 +37,7 @@ export default function Navbar() {
         </div>
       </div>
 
-      <div className="flex-1 items-center justify-between p-4">
+      <div className="flex items-center justify-between p-4">
         <h1 className="text-xl font-semibold">ChatGPT 3.5</h1>
         <ChevronDownIcon className="h-6 w-6" />
       </div>

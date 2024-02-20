@@ -12,23 +12,37 @@ export default function ChatForm() {
   const [messageContent, setMessageContent] = useState("");
   const chatPageId = useChatPageStore((s) => s.chatPageId);
   const addMessage = useChatMessagesStore((s) => s.addMessage);
-  const createMessage = api.chatMessage.create.useMutation({
+  const createUserMessage = api.chatMessage.create.useMutation({
     onSettled: () => {
       setMessageContent("");
     },
-    onSuccess: () => {
+    onSuccess: (data) => {
       addMessage({
-        sender: "You",
-        content: messageContent,
+        sender: data.sender,
+        content: data.content,
+      });
+      createAIMessage.mutate({
+        sender: "ChatGPT",
+        content: "You said: " + data.content,
+        chatPageId: chatPageId,
       });
     },
   });
+  const createAIMessage = api.chatMessage.create.useMutation({
+    onSuccess: (data) => {
+      addMessage({
+        sender: data.sender,
+        content: data.content,
+      });
+    },
+  });
+
   return (
     <form
       className="flex flex-grow items-center p-4"
       onSubmit={(e) => {
         e.preventDefault();
-        createMessage.mutate({
+        createUserMessage.mutate({
           content: messageContent,
           sender: "You",
           chatPageId: chatPageId,
@@ -44,9 +58,9 @@ export default function ChatForm() {
       <Button
         className="ml-4"
         variant="secondary"
-        disabled={createMessage.isLoading}
+        disabled={createUserMessage.isLoading}
       >
-        {createMessage.isLoading ? "Sending" : "Send"}
+        {createUserMessage.isLoading ? "Sending" : "Send"}
       </Button>
     </form>
   );
